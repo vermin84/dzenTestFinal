@@ -1,0 +1,14 @@
+.dateWrapper {
+  display: grid;
+  align-items: center;
+  justify-items: center;
+  padding: 5px;
+  gap: 5px;
+  font-size: 18px;
+  color: var(--grey700);
+}
+
+.dateSecondary {
+  color: var(--grey500);
+  font-size: 14px;
+}

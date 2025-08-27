@@ -1,0 +1,97 @@
+/*! normalize.css v8.0.1 | MIT License | github.com/necolas/normalize.css */
+
+/* Document
+   ========================================================================== */
+
+/**
+ * 1. Correct the line height in all browsers.
+ * 2. Prevent adjustments of font size after orientation changes in iOS.
+ */
+
+html {
+  line-height: 1.15; /* 1 */
+  -webkit-text-size-adjust: 100%; /* 2 */
+}
+
+/* Sections
+   ========================================================================== */
+
+/**
+ * Remove the margin in all browsers.
+ */
+
+body {
+  margin: 0;
+  height: 100%;
+  background-color: var(--grey100);
+}
+
+/* Text-level semantics
+   ========================================================================== */
+
+/**
+ * Correct the font weight inheritance from 'b' and 'strong' elements.
+ */
+
+b,
+strong {
+  font-weight: bolder;
+}
+
+/* Grouping content
+   ========================================================================== */
+
+/**
+ * Correct the inheritance and scaling of font size in all browsers.
+ */
+ul,
+ol,
+li {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+a {
+  text-decoration: none; /* убирает подчеркивание */
+  color: inherit; /* наследование цвета, чтобы ссылки не выделялись синим */
+  cursor: pointer; /* курсор-указатель при наведении */
+}
+
+code,
+kbd,
+samp,
+pre {
+  font-family: monospace, monospace; /* 1 */
+  font-size: 1em; /* 2 */
+}
+
+/* Embedded content
+   ========================================================================== */
+
+/**
+ * Remove border when inside 'a' element in IE 10.
+ */
+
+img {
+  border-style: none;
+}
+
+/* Forms
+   ========================================================================== */
+
+/**
+ * Change the font styles in all browsers.
+ */
+
+button,
+input,
+optgroup,
+select,
+textarea {
+  font-family: inherit; /* 1 */
+  font-size: 100%; /* 1 */
+  line-height: 1.15; /* 1 */
+  margin: 0; /* 2 */
+}
+
+/* More rules follow in the full file */

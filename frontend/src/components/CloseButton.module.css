@@ -1,0 +1,15 @@
+.closeButton {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  border: none;
+  background: transparent;
+  font-size: 20px;
+  cursor: pointer;
+  color: #333;
+  transition: color 0.2s ease;
+}
+
+.closeButton:hover {
+  color: red;
+}

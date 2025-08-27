@@ -1,0 +1,16 @@
+.deleteBtn {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  color: var(--grey500);
+  font-size: 1.2rem;
+  padding: 6px;
+  transition:
+    color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.deleteBtn:hover {
+  color: var(--grey300);
+  transform: scale(1.1);
+}

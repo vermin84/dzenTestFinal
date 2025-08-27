@@ -1,0 +1,11 @@
+.orderListWrapper {
+  flex: 0 0 50%;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease-in-out;
+}
+
+.orderListContainer {
+  display: grid;
+  gap: 20px;
+}

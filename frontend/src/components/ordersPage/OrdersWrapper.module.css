@@ -1,0 +1,11 @@
+.ordersWrapper {
+  display: flex;
+  padding: 30px 20px;
+  gap: 50px;
+}
+
+.ordersWrapperTitle {
+  font-size: 24px;
+  color: var(--grey700);
+  padding: 20px 35px;
+}

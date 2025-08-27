@@ -1,0 +1,12 @@
+.productsFilterWrapper {
+  padding: 15px 25px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 35px;
+}
+
+.productsFilterTitle {
+  font-size: 20px;
+  color: var(--grey700);
+}

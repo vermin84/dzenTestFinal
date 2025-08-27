@@ -1,0 +1,19 @@
+.productShortWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 15px;
+  background-color: var(--white);
+  border: 1px solid var(--grey300);
+  gap: 5px;
+  transition: all 0.3s ease-in-out;
+  margin: 5px 0;
+}
+.productShortWrapper:hover {
+  transform: scale(1.01);
+}
+
+.productShortStatus {
+  color: var(--grey500);
+  font-size: 14px;
+}

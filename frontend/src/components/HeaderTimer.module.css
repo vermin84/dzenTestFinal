@@ -1,0 +1,24 @@
+.headerTimerWrapper {
+  display: flex;
+  gap: 25px;
+  align-items: flex-end;
+}
+
+.headerTimerDateWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.headerTimerDateDay {
+  font-size: 18px;
+}
+
+.headerTimerDateValue {
+}
+
+.headerTimerClock {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}

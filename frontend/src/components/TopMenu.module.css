@@ -1,0 +1,10 @@
+.TopMenu {
+  padding: 15px 20px 15px 250px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: var(--white);
+  box-shadow:
+    0 2px 4px rgba(0, 0, 0, 0.04),
+    0 10px 18px rgba(0, 0, 0, 0.2);
+}

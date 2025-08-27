@@ -1,0 +1,40 @@
+.orderWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border: solid 1px var(--grey300);
+  border-radius: 5px;
+  padding: 10px 20px;
+  background-color: var(--white);
+  box-shadow:
+    0 2px 4px rgba(0, 0, 0, 0.04),
+    0 10px 18px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s;
+}
+.orderWrapper:hover {
+  transform: translate(5px, -5px);
+  box-shadow:
+    0 4px 8px rgba(0, 0, 0, 0.04),
+    0 14px 22px rgba(0, 0, 0, 0.2);
+}
+
+.orderTitle {
+  font-size: 20px;
+  text-wrap: wrap;
+  color: var(--grey700);
+  text-decoration: underline;
+  padding: 5px;
+}
+
+.orderDetails {
+  display: grid;
+  gap: 5px;
+  padding: 5px;
+  font-size: 24px;
+  color: var(--grey700);
+}
+
+.orderDetailsBottom {
+  font-size: 16px;
+  color: var(--grey500);
+}

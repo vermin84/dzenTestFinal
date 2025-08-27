@@ -1,0 +1,26 @@
+.productWrapper {
+  display: flex;
+  padding: 10px 15px;
+  border: 1px solid var(--grey300);
+  border-radius: 5px;
+  align-items: center;
+  justify-content: space-between;
+  color: var(--grey700);
+  font-size: 18px;
+  background-color: var(--white);
+  box-shadow:
+    0 2px 4px rgba(0, 0, 0, 0.04),
+    0 10px 18px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease-in-out;
+}
+.productWrapper:hover {
+  transform: translate(5px, -5px);
+  box-shadow:
+    0 4px 8px rgba(0, 0, 0, 0.04),
+    0 14px 22px rgba(0, 0, 0, 0.2);
+}
+
+.productStatus {
+  font-size: 14px;
+  padding: 0 5px;
+}

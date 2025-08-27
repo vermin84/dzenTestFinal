@@ -1,0 +1,15 @@
+services:
+  frontend:
+    build: ./frontend
+    ports:
+      - "5173:5173"
+    volumes:
+      - ./frontend:/app # монтируем код в контейнер
+      - /app/node_modules # node_modules отдельный volume
+    environment:
+      - CHOKIDAR_USEPOLLING=true
+  backend:
+    build: ./backend
+    container_name: backend
+    ports:
+      - "3000:3000"

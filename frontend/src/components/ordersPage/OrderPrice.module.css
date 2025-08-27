@@ -1,0 +1,14 @@
+.orderPriceWrapper {
+  display: grid;
+  gap: 5px;
+  padding: 5px;
+}
+
+.orderPriceMain {
+  font-size: 18px;
+  color: var(--grey700);
+}
+.orderPriceSecondary {
+  color: var(--grey500);
+  font-size: 14px;
+}

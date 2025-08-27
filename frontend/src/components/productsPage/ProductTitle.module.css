@@ -1,0 +1,14 @@
+.productTitleWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 0 5px;
+}
+.productTitleValue {
+  font-size: 14px;
+  border-bottom: 1px solid var(--grey500);
+}
+.productTitleSerial {
+  font-size: 10px;
+  color: var(--grey500);
+}
