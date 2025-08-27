@@ -23,6 +23,6 @@ The app demonstrates basic React and Redux capabilities and can be extended for 
 
 ### 🔧 launch in Docker
 ```bash
-git clone https://github.com/Vermin84/dzenTestFinal.git
+git clone https://github.com/vermin84/dzenTestFinal.git
 cd project-name
 docker-compose up --build
