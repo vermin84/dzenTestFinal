@@ -10,6 +10,5 @@ services:
       - CHOKIDAR_USEPOLLING=true
   backend:
     build: ./backend
-    container_name: backend
     ports:
       - "3000:3000"
