@@ -1,0 +1,67 @@
+name: Deploy Fullstack App
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    env:
+      NODE_VERSION: 20
+
+    steps:
+      # 1. Клонируем репозиторий
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # 2. Устанавливаем Node.js
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+
+      # 3. Устанавливаем зависимости фронтенда
+      - name: Install frontend dependencies
+        working-directory: ./frontend
+        run: npm ci
+
+      # 4. Собираем фронтенд
+      - name: Build frontend
+        working-directory: ./frontend
+        run: npm run build
+
+      # 5. Копируем сборку в бэкенд (если нужен единый Docker образ)
+      - name: Copy frontend build to backend
+        run: |
+          mkdir -p ./backend/dist
+          cp -r ./frontend/dist/* ./backend/dist/
+
+      # 6. Устанавливаем зависимости бэка
+      - name: Install backend dependencies
+        working-directory: ./backend
+        run: npm ci
+
+      # 7. Билдим Docker образ
+      - name: Build Docker image
+        working-directory: ./backend
+        run: docker build -t vermin84/dzenTestFinal:latest .
+
+      # 8. Логинимся в Docker registry (например Docker Hub)
+      - name: Login to Docker Hub
+        uses: docker/login-action@v2
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+
+      # 9. Пушим образ в Docker Hub
+      - name: Push Docker image
+        run: |
+          docker tag vermin84/dzenTestFinal:latest ${{ secrets.DOCKER_USERNAME }}/myapp:latest
+          docker push ${{ secrets.DOCKER_USERNAME }}/myapp:latest
+
+      # 10. (Опционально) Деплой на Render или Railway через CLI
+      # Например, для Render: 
+      # - name: Deploy to Render
+      #   run: render deploy service --service-id ${{ secrets.RENDER_SERVICE_ID }} --api-key ${{ secrets.RENDER_API_KEY }}
