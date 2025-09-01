@@ -1,29 +1,34 @@
-name: Docker Build & Push
+name: Build and Deploy Docker App
 
 on:
   push:
     branches:
-      - master
+      - master  # триггер на пуш в master
 
 jobs:
-  build-and-push:
+  deploy:
     runs-on: ubuntu-latest
+
     steps:
-      - name: Checkout repo
+      # 1. Получаем код репозитория
+      - name: Checkout repository
         uses: actions/checkout@v3
 
-      - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v2
-
-      - name: Login to Docker Hub
+      # 2. Логин в Docker Hub через secrets
+      - name: Log in to Docker Hub
         uses: docker/login-action@v2
         with:
-          username: ${{ secrets.verminator84 }}
-          password: ${{ secrets.dckr_pat_mkeb288z7Tcd9NBqz9FTqtFHPic }}
+          username: ${{ secrets.DOCKER_HUB_USERNAME }}
+          password: ${{ secrets.DOCKER_HUB_PASSWORD }}
 
-      - name: Build and push Docker image
-        uses: docker/build-push-action@v5
-        with:
-          context: .
-          push: true
-          tags: vermin84/dzentestfinal:latest
+      # 3. Сборка и пуш Docker образа
+      - name: Build and Push Docker image
+        run: |
+          # Указываем имя образа
+          IMAGE_NAME=myuser/dzenapp:latest
+          
+          # Сборка образа (корень проекта содержит Dockerfile для всего приложения)
+          docker build -t $IMAGE_NAME .
+          
+          # Пуш в Docker Hub
+          docker push $IMAGE_NAME
