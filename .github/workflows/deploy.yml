@@ -25,7 +25,7 @@ jobs:
       - name: Build and Push Docker image
         run: |
           # Указываем имя образа
-          IMAGE_NAME=verminator84/dzenTestFinal:latest
+          IMAGE_NAME=verminator84/dzentestfinal:latest
           
           # Сборка образа (корень проекта содержит Dockerfile для всего приложения)
           docker build -t $IMAGE_NAME .
