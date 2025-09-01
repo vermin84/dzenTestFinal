@@ -1,0 +1,31 @@
+services:
+  - type: web
+    name: backend
+    env: docker
+    plan: free
+    branch: master
+    dockerfilePath: ./backend/Dockerfile
+    envVars:
+      - key: DB_HOST
+        fromDatabase:
+          name: your-mysql-db
+          property: host
+      - key: DB_USER
+        fromDatabase:
+          name: your-mysql-db
+          property: user
+      - key: DB_PASSWORD
+        fromDatabase:
+          name: your-mysql-db
+          property: password
+      - key: DB_NAME
+        fromDatabase:
+          name: your-mysql-db
+          property: name
+  - type: web
+    name: frontend
+    env: docker
+    plan: free
+    branch: master
+    dockerfilePath: ./frontend/Dockerfile
+    envVars: []
