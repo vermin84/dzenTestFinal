@@ -118,10 +118,11 @@ app.get("/orders-with-products", async (req, res) => {
 // ===========================
 // Запуск сервера
 // ===========================
-const PORT = 3000;
+const PORT = process.env.PORT || 3000; // берем порт из Railway или 3000 локально
 
 server.listen(PORT, async () => {
   try {
+    // pool должен быть настроен через DATABASE_URL или другие env переменные
     await pool.query("SELECT 1");
     console.log(`✅ Server started on port ${PORT} and connected to MySQL`);
   } catch (err) {
