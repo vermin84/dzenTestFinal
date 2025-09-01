@@ -4,8 +4,6 @@ services:
     env: docker
     plan: free
     branch: master
-    buildCommand: npm install
-    startCommand: node backend/server.js
     envVars:
       - key: DB_HOST
         value: "<host-from-render-mysql>"
@@ -21,8 +19,6 @@ services:
     env: docker
     plan: free
     branch: master
-    buildCommand: npm install && npm run build
-    startCommand: npm run preview
     envVars:
       - key: REACT_APP_API_URL
         value: "https://dzen-backend.onrender.com"
