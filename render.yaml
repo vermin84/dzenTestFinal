@@ -8,21 +8,13 @@ services:
     startCommand: node backend/server.js
     envVars:
       - key: DB_HOST
-        fromDatabase:
-          name: dzen-mysql
-          property: host
+        value: "<host-from-render-mysql>"
       - key: DB_USER
-        fromDatabase:
-          name: dzen-mysql
-          property: user
+        value: "<user-from-render-mysql>"
       - key: DB_PASSWORD
-        fromDatabase:
-          name: dzen-mysql
-          property: password
+        value: "<password-from-render-mysql>"
       - key: DB_NAME
-        fromDatabase:
-          name: dzen-mysql
-          property: database
+        value: "<database-from-render-mysql>"
 
   - type: web
     name: dzen-frontend
@@ -34,9 +26,3 @@ services:
     envVars:
       - key: REACT_APP_API_URL
         value: "https://dzen-backend.onrender.com"
-
-databases:
-  - name: dzen-mysql
-    engine: mysql
-    version: "8"
-    plan: free
