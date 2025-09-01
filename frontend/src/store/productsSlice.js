@@ -3,8 +3,8 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 export const fetchProducts = createAsyncThunk(
   "products/fetchProducts",
   async () => {
-   // const res = await fetch("http://localhost:3000/products");
-   const res = await fetch("https://dzen-backend.onrender.com/products");
+    const res = await fetch("http://localhost:3000/products");
+   //const res = await fetch("https://dzen-backend.onrender.com/products");
     if (!res.ok) throw new Error("Failed to fetch products");
     return res.json();
   }
