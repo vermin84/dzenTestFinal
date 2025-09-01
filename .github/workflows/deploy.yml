@@ -25,7 +25,7 @@ jobs:
       - name: Build and Push Docker image
         run: |
           # Указываем имя образа
-          IMAGE_NAME=myuser/dzenapp:latest
+          IMAGE_NAME=myuser/dzenTestFinal:latest
           
           # Сборка образа (корень проекта содержит Dockerfile для всего приложения)
           docker build -t $IMAGE_NAME .
