@@ -1,13 +1,22 @@
+// backend/server.js
 import express from "express";
 import http from "http";
 import { Server } from "socket.io";
+import cors from "cors";
+import mysql from "mysql2/promise";
 
 const app = express();
 const server = http.createServer(app);
 
+app.use(cors());
+app.use(express.json());
+
+// ===========================
+// Socket.IO для активных сессий
+// ===========================
 const io = new Server(server, {
   cors: {
-    origin: "*", // React dev server
+    origin: "*",
     methods: ["GET", "POST"],
     credentials: true,
   },
@@ -18,7 +27,6 @@ let activeSessions = 0;
 io.on("connection", (socket) => {
   activeSessions++;
   console.log("New connection. Active sessions:", activeSessions);
-
   io.emit("activeSessions", activeSessions);
 
   socket.on("disconnect", () => {
@@ -28,6 +36,95 @@ io.on("connection", (socket) => {
   });
 });
 
-server.listen(3000, () => {
-  console.log("✅ Server started on port 3000");
+// ===========================
+// Подключение к MySQL
+// ===========================
+const pool = mysql.createPool({
+  host: process.env.DB_HOST || "localhost",
+  user: process.env.DB_USER || "root",
+  password: process.env.DB_PASSWORD || "root",
+  database: process.env.DB_NAME || "testdb",
+  waitForConnections: true,
+  connectionLimit: 10,
+  queueLimit: 0,
+});
+
+// ===========================
+// Вспомогательная функция для формата продукта
+// ===========================
+const formatProduct = (p) => ({
+  ...p,
+  price: [
+    { value: Number(p.price_usd || 0), symbol: "USD", isDefault: 1 },
+    { value: Number(p.price_uah || 0), symbol: "UAH", isDefault: 0 },
+  ],
+  guarantee: {
+    start: p.guarantee_start || null,
+    end: p.guarantee_end || null,
+  },
+});
+
+// ===========================
+// REST API
+// ===========================
+
+// Проверка сервера
+app.get("/", (req, res) => {
+  res.send("Server is running 🚀");
+});
+
+// Получить все продукты
+app.get("/products", async (req, res) => {
+  try {
+    const [rows] = await pool.query("SELECT * FROM products ORDER BY id");
+    res.json(rows.map(formatProduct));
+  } catch (err) {
+    console.error("Error fetching products:", err.code, err.sqlMessage);
+    res.status(500).json({ error: err.message });
+  }
+});
+
+// Получить все заказы
+app.get("/orders", async (req, res) => {
+  try {
+    const [rows] = await pool.query("SELECT * FROM orders ORDER BY id");
+    res.json(rows);
+  } catch (err) {
+    console.error("Error fetching orders:", err.code, err.sqlMessage);
+    res.status(500).json({ error: err.message });
+  }
+});
+
+// Получить заказы с вложенными продуктами
+app.get("/orders-with-products", async (req, res) => {
+  try {
+    const [orders] = await pool.query("SELECT * FROM orders ORDER BY id");
+    const [products] = await pool.query("SELECT * FROM products ORDER BY id");
+
+    const result = orders.map(order => ({
+      ...order,
+      products: products
+        .filter(p => p.order_id === order.id)
+        .map(formatProduct),
+    }));
+
+    res.json(result);
+  } catch (err) {
+    console.error("Error fetching orders with products:", err.code, err.sqlMessage);
+    res.status(500).json({ error: err.message });
+  }
+});
+
+// ===========================
+// Запуск сервера
+// ===========================
+const PORT = 3000;
+
+server.listen(PORT, async () => {
+  try {
+    await pool.query("SELECT 1");
+    console.log(`✅ Server started on port ${PORT} and connected to MySQL`);
+  } catch (err) {
+    console.error("❌ Failed to connect to MySQL:", err.code, err.sqlMessage);
+  }
 });

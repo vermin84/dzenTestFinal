@@ -12,11 +12,9 @@ import Modal from "../modal/Modal";
 export default function Product({ product }) {
   const [showModal, setShowModal] = useState(false);
   const orders = useSelector((state) => state.orders.list);
-  const productOrders = orders.filter((order) =>
-    order.products.some((p) =>
-      typeof p === "object" ? p.id === product.id : p === product.id,
-    ),
-  );
+  const productOrders = orders.filter(order =>
+  order.products?.some(p => p.id === product.id)
+);
 
   const dispatch = useDispatch();
   function deleteHandler(e) {
@@ -50,7 +48,7 @@ export default function Product({ product }) {
           <Price key={item.value} price={item} />
         ))}
       </div>
-      <div>{productOrders[0].title}</div>
+      <div>{productOrders.length ?productOrders[0].title : 'no order'}</div>
       <DeleteButton onDelete={deleteHandler} />
       {showModal && (
         <Modal

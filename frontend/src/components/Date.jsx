@@ -1,7 +1,7 @@
 import styles from "./Date.module.css";
 export default function Date({ date }) {
   const [datePart] = date.split(" ");
-  const [year, month, day] = datePart.split("-");
+  const [year, month, day] = date.split("T")[0].split("-");
 
   return (
     <div className={styles.dateWrapper}>
