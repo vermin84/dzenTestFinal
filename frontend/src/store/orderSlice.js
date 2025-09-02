@@ -10,7 +10,7 @@ export const fetchOrders = createAsyncThunk(
 
     //const res = await fetch("https://dzen-backend.onrender.com/orders-with-products");
     if (!res.ok) throw new Error("Failed to fetch orders");
-    console.log(res.json())
+    
     return res.json();
   }
 );
