@@ -4,6 +4,7 @@ import http from "http";
 import { Server } from "socket.io";
 import cors from "cors";
 import mysql from "mysql2/promise";
+
 try {
   const dotenv = await import("dotenv");
   dotenv.config();
@@ -11,10 +12,6 @@ try {
 } catch {
   console.log("ℹ️ .env не найден, используем переменные окружения сервера");
 }
-console.log("Используемые переменные окружения:");
-console.log("DB_HOST:", process.env.DB_HOST);
-console.log("DB_USER:", process.env.DB_USER);
-
 
 
 const app = express();
@@ -60,7 +57,16 @@ io.on("connection", (socket) => {
   connectionLimit: 10,
   queueLimit: 0,
 });*/
+console.log("Создаем пул MySQL с параметрами:");
+console.log({
+  host: process.env.MYSQLHOST || process.env.DB_HOST || "localhost",
+  port: process.env.MYSQLPORT || process.env.DB_PORT || 3306,
+  user: process.env.MYSQLUSER || process.env.DB_USER || "root",
+  database: process.env.MYSQLDATABASE || process.env.DB_NAME || "testdb",
+});
+
 const pool = mysql.createPool({
+  
   host: process.env.MYSQLHOST || process.env.DB_HOST || "localhost",
   port: process.env.MYSQLPORT || process.env.DB_PORT || 3306,
   user: process.env.MYSQLUSER || process.env.DB_USER || "root",
