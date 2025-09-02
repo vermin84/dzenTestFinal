@@ -4,8 +4,13 @@ import http from "http";
 import { Server } from "socket.io";
 import cors from "cors";
 import mysql from "mysql2/promise";
-import dotenv from 'dotenv';
-dotenv.config();
+try {
+  const dotenv = await import("dotenv");
+  dotenv.config();
+  console.log("✅ .env загружен");
+} catch {
+  console.log("ℹ️ .env не найден, используем переменные окружения сервера");
+}
 
 
 const app = express();
