@@ -4,6 +4,9 @@ import http from "http";
 import { Server } from "socket.io";
 import cors from "cors";
 import mysql from "mysql2/promise";
+import dotenv from 'dotenv';
+dotenv.config();
+
 
 const app = express();
 const server = http.createServer(app);
@@ -39,11 +42,21 @@ io.on("connection", (socket) => {
 // ===========================
 // Подключение к MySQL
 // ===========================
+/*const pool = mysql.createPool({
+  host: process.env.DB_HOST, //|| "mysql.railway.internal",
+  user: process.env.DB_USER, // || "root",
+  password: process.env.DB_PASSWORD,// || "DzEOZoNrzVwqtdIplsJYWkwtbZJTMGkJ",
+  database: process.env.DB_NAME, // || "railway",
+  waitForConnections: true,
+  connectionLimit: 10,
+  queueLimit: 0,
+});*/
 const pool = mysql.createPool({
-  host: process.env.DB_HOST || "mysql.railway.internal",
-  user: process.env.DB_USER || "root",
-  password: process.env.DB_PASSWORD || "DzEOZoNrzVwqtdIplsJYWkwtbZJTMGkJ",
-  database: process.env.DB_NAME || "railway",
+  host: process.env.MYSQLHOST || process.env.DB_HOST || "localhost",
+  port: process.env.MYSQLPORT || process.env.DB_PORT || 3306,
+  user: process.env.MYSQLUSER || process.env.DB_USER || "root",
+  password: process.env.MYSQLPASSWORD || process.env.DB_PASSWORD || "root",
+  database: process.env.MYSQLDATABASE || process.env.DB_NAME || "testdb",
   waitForConnections: true,
   connectionLimit: 10,
   queueLimit: 0,
