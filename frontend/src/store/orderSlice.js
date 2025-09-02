@@ -1,5 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { removeProduct } from "./productsSlice";
+import { BASE_URL } from "../../data/url";
 
 // Асинхронный thunk для загрузки заказов с бекенда
 export const fetchOrders = createAsyncThunk(

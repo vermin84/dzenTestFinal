@@ -1,4 +1,5 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import { BASE_URL } from "../../data/url";
 
 export const fetchProducts = createAsyncThunk(
   "products/fetchProducts",
