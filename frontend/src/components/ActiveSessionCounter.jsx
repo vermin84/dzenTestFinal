@@ -5,7 +5,7 @@ export default function ActiveSessionsCounter() {
   const [count, setCount] = useState(0);
 
   useEffect(() => {
-    const socket = io("http://localhost:3000");
+    const socket = io(import.meta.env.VITE_BACKEND_URL || "http://localhost:3000");
 
     socket.on("activeSessions", (value) => {
       console.log("Active sessions:", value);
