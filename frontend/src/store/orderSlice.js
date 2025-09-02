@@ -5,12 +5,13 @@ import { removeProduct } from "./productsSlice";
 export const fetchOrders = createAsyncThunk(
   "orders/fetchOrders",
   async () => {
-    const res = await fetch("http://localhost:3000/orders-with-products");
+    const res = await fetch(`${BASE_URL}/orders-with-products"`);
     //const res = await fetch("https://dzen-backend.onrender.com/orders-with-products");
     if (!res.ok) throw new Error("Failed to fetch orders");
     return res.json();
   }
 );
+
 
 const ordersSlice = createSlice({
   name: "orders",
