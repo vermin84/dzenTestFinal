@@ -5,9 +5,9 @@ export default function ActiveSessionsCounter() {
   const [count, setCount] = useState(0);
 
   // Берём URL бекенда из env или используем локальный
-  const BACKEND_URL = import.meta.env.VITE_BACKEND_URL
+  const BACKEND_URL = 'https://dzen-backend-production-7de7.up.railway.app'/*import.meta.env.VITE_BACKEND_URL
     ? import.meta.env.VITE_BACKEND_URL.replace(/\/$/, "") // убираем конечный слеш
-    : "http://localhost:3000";
+    : "http://localhost:3000";*/
 
   console.log("Connecting to backend at:", BACKEND_URL);
 
