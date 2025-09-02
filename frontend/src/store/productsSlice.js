@@ -4,7 +4,7 @@ import { BASE_URL } from "../../data/url";
 export const fetchProducts = createAsyncThunk(
   "products/fetchProducts",
   async () => {
-    const res = await fetch(`${BASE_URL}/products"`);
+    const res = await fetch(`${BASE_URL}/products`);
    //const res = await fetch("https://dzen-backend.onrender.com/products");
     if (!res.ok) throw new Error("Failed to fetch products");
     return res.json();
