@@ -4,18 +4,31 @@ import { io } from "socket.io-client";
 export default function ActiveSessionsCounter() {
   const [count, setCount] = useState(0);
 
+  // Берём URL бекенда из env или используем локальный
+  const BACKEND_URL = import.meta.env.VITE_BACKEND_URL
+    ? import.meta.env.VITE_BACKEND_URL.replace(/\/$/, "") // убираем конечный слеш
+    : "http://localhost:3000";
+
+  console.log("Connecting to backend at:", BACKEND_URL);
+
   useEffect(() => {
-    const socket = io(import.meta.env.VITE_BACKEND_URL || "http://localhost:3000");
+    const socket = io(BACKEND_URL, {
+      transports: ["websocket"], // иногда помогает с CORS и прокси
+    });
 
     socket.on("activeSessions", (value) => {
       console.log("Active sessions:", value);
       setCount(value);
     });
 
+    socket.on("connect_error", (err) => {
+      console.error("Socket connection error:", err.message);
+    });
+
     return () => {
       socket.disconnect();
     };
-  }, []);
+  }, [BACKEND_URL]);
 
   return <div>Active sessions: {count}</div>;
 }
