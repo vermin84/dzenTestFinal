@@ -11,6 +11,10 @@ try {
 } catch {
   console.log("ℹ️ .env не найден, используем переменные окружения сервера");
 }
+console.log("Используемые переменные окружения:");
+console.log("DB_HOST:", process.env.DB_HOST);
+console.log("DB_USER:", process.env.DB_USER);
+
 
 
 const app = express();
