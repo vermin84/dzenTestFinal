@@ -22,12 +22,12 @@ export default function ProductShort({ product }) {
   function cancelHandler() {
     setShowModal(false);
   }
-
+  console.log(product)
   return (
     <li className={styles.productShortWrapper}>
       <ProductTitle title={product.title} serialNumber={product.serialNumber} />
       <span className={styles.productShortStatus}>
-        {product.isNew ? "available" : "unavailable"}
+        {product.is_new ? "available" : "unavailable"}
       </span>
       <DeleteButton onDelete={deleteHandler} />
       {showModal && (

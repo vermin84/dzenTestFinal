@@ -41,7 +41,7 @@ export default function Product({ product }) {
       {<Guarantee dates={product.guarantee} />}
       <div>{product.type}</div>
       <div className={styles.productStatus}>
-        {product.isNew > 0 ? "NEW" : "USED"}
+        {product.is_new > 0 ? "NEW" : "USED"}
       </div>
       <div>
         {product.price.map((item) => (
