@@ -22,7 +22,7 @@ export default function ProductShort({ product }) {
   function cancelHandler() {
     setShowModal(false);
   }
-  console.log(product)
+
   return (
     <li className={styles.productShortWrapper}>
       <ProductTitle title={product.title} serialNumber={product.serialNumber} />
